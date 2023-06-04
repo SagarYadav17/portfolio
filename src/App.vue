@@ -4,7 +4,9 @@ import BlogPostCard from './components/BlogPostCard.vue';
 export default {
     name: 'App',
     data() {
-        return { blogPosts: null }
+        return {
+            blogPosts: null, blog_domain: import.meta.env.VITE_BLOG_DOMAIN
+        }
     },
     async mounted() {
         let query = `
@@ -59,9 +61,9 @@ export default {
     </header>
 
     <div class="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
-        <div class="rounded overflow-hidden shadow-lg" v-for="post in blogPosts">
+        <div class="rounded overflow-hidden shadow-lg" v-for="post in  blogPosts ">
             <div class="px-6 py-4">
-                <div class="font-bold text-xl mb-2">{{ post.title }}</div>
+                <a :href="blog_domain + post.slug" class="font-bold text-xl mb-2">{{ post.title }}</a>
                 <p class="text-gray-700 text-base">
                     {{ post.brief }}
                 </p>
